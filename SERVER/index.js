@@ -6,6 +6,8 @@ import cors from 'cors'; // Import cors
 const uri = process.env.DB_URI; 
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+
 app.use(express.json());
 app.use(cors(
   {
@@ -86,39 +88,21 @@ const Quiz = mongoose.model('Quiz', quizSchema);
 //   }
 
 
-let correctAnswers = [];
+// let correctAnswers = [];
 // Route to fetch 15 random quiz questions
 app.get('/api/questions', async (req, res) => {
     try {
-        
-        const records = await Quiz.aggregate([
-            { $sample: { size: 3 } }  
-        ]);
-        // Separate answers and questions with properly mapped options and additional fields
-        const questionsWithoutAnswers = records.map(({ _id, question, correct_answer, incorrect_answers, type, difficulty, category }) => ({
-            _id,
-            question,
-            options: [...incorrect_answers, correct_answer], // Shuffle options for randomness
-            type,
-            difficulty,
-            category
-        }));
-        // console.log(questionsWithoutAnswers);
-        
-        const correctAnswers = records.map(({ _id, correct_answer }) => ({ _id, correct_answer }));
-
-        res.status(200).json(questionsWithoutAnswers);        
-        
-        // return records;
+      const quizzes = await Quiz.aggregate([{ $sample: { size: 15 } }]);
+      res.status(200).json(quizzes);
     } catch (error) {
-        console.error("Error fetching records:", error);
-    } 
-
+      console.error(error);
+      res.status(500).json({ message: 'Error fetching random quizzes' });
+    }
 });
 
-app.get("/api/answers", (req, res) => {
-    res.status(200).json(correctAnswers);  
-});
+// app.get("/api/answers", (req, res) => {
+//     res.status(200).json(correctAnswers);  
+// });
 
 app.get('/', async (req, res) => {
   res.send("Hello")
@@ -126,6 +110,6 @@ app.get('/', async (req, res) => {
 
 
 // Start the server
-app.listen(3001, () => {
-    console.log("Server is running on port 3001");
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
 });
