@@ -18,8 +18,8 @@ app.use(cors(
 )); // Enable CORS for all routes
 
 // Connect to MongoDB
-// mongoose.connect(uri, {
-mongoose.connect('mongodb+srv://vikas123:SpGBtqkOpLf7Sb2v@cluster0.zaohd.mongodb.net/Quiz?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect(uri, {
+// mongoose.connect('mongodb+srv://vikas123:SpGBtqkOpLf7Sb2v@cluster0.zaohd.mongodb.net/Quiz?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
