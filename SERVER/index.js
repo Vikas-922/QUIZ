@@ -86,8 +86,19 @@ let aquizAns = [];
 app.get('/api/questions', async (req, res) => {
     try {
       const quizzes = await Quiz.aggregate([{ $sample: { size: 15 } }]);
-      aquizAns = [{"a" : 2} , {"b" : 5}]
-      res.status(200).json(quizzes);
+      const questionsWithoutAnswers = quizzes.map(({ _id, question, correct_answer, incorrect_answers, type, difficulty, category }) => ({
+            _id,
+            question,
+            options: [...incorrect_answers, correct_answer].sort(() => Math.random() - 0.5), 
+            type,
+            difficulty,
+            category
+        }));
+        // console.log(questionsWithoutAnswers);        
+        const aquizAns = quizzes.map(({ _id, correct_answer }) => ({ _id, correct_answer }));
+      // aquizAns = [{"a" : 2} , {"b" : 5}]
+       res.status(200).json(questionsWithoutAnswers);
+      // res.status(200).json(quizzes);
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Error fetching random quizzes' });
