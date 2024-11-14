@@ -91,21 +91,21 @@ async function fetchRecords() {
             { $sample: { size: 3 } }  
         ]);
         // Separate answers and questions with properly mapped options and additional fields
-        const questionsWithoutAnswers = records.map(({ _id, question, correct_answer, incorrect_answers, type, difficulty, category }) => ({
-            _id,
-            question,
-            options: [...incorrect_answers, correct_answer].sort(() => Math.random() - 0.5), // Shuffle options for randomness
-            type,
-            difficulty,
-            category
-        }));
+        // const questionsWithoutAnswers = records.map(({ _id, question, correct_answer, incorrect_answers, type, difficulty, category }) => ({
+        //     _id,
+        //     question,
+        //     options: [...incorrect_answers, correct_answer].sort(() => Math.random() - 0.5), // Shuffle options for randomness
+        //     type,
+        //     difficulty,
+        //     category
+        // }));
         // console.log(questionsWithoutAnswers);
         
-        const answers = records.map(({ _id, correct_answer }) => ({ _id, correct_answer }));
+        // const answers = records.map(({ _id, correct_answer }) => ({ _id, correct_answer }));
 
-        return { questions: questionsWithoutAnswers, answers };        
+        // return { questions: questionsWithoutAnswers, answers };        
         
-        // return records;
+        return records;
     } catch (error) {
         console.error("Error fetching records:", error);
     } 
@@ -113,14 +113,15 @@ async function fetchRecords() {
 
 
 
-let correctAnswers = [];
+let correctAnswers = [{"a" : 12}, {"b" : 12}];
 //sdsd
 console.log('a');
 
 app.get("/api/questions", async (req, res) => {
     try {
-        const { questions, answers } = await fetchRecords();
-        correctAnswers = answers;  
+        // const { questions, answers } = await fetchRecords();
+        const questions = await fetchRecords();
+        // correctAnswers = answers;  
         res.status(200).json(questions);  
     } catch (error) {
         res.status(500).json({ message: 'Error fetching random quizzes' });
