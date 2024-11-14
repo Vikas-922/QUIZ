@@ -9,9 +9,12 @@ app.use(express.json());
 
 app.use(cors(
     {
+    
     origin: ["http://localhost:3000"],
     methods: ["POST", "GET"],
     credentials: true
+
+
 }
 
   )); // Enable CORS for all routes abc
