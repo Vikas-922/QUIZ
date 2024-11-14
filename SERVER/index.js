@@ -2,7 +2,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from "dotenv";
 import cors from 'cors'; // Import cors
-
 dotenv.config(); // Load environment variables from .env file
 const uri = process.env.DB_URI; 
 
