@@ -26,7 +26,6 @@ app.use(cors(
 
 // Connect to MongoDB
 mongoose.connect(uri, {
-// mongoose.connect('mongodb+srv://vikas123:SpGBtqkOpLf7Sb2v@cluster0.zaohd.mongodb.net/Quiz?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
