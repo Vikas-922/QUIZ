@@ -311,7 +311,8 @@ async function fetchQuizData() {
              }
          }, 500);
 
-        const response = await fetch('http://localhost:3000/api/questions');  // Fetch data from your API
+        const response = await fetch('https://quiz-two-inky.vercel.app/api/questions');  // Fetch data from your API
+        // const response = await fetch('http://localhost:3000/api/questions');
         console.log(response);
         
         if (!response.ok) {
@@ -452,8 +453,9 @@ async function submitQuiz() {
     const userResponses = [];
     let qqq =[];
 
-    // Fetch the correct answers from the server
-    const response = await fetch('http://localhost/api/answers');
+    // Fetch the correct answers from the server    https://quiz-two-inky.vercel.app/
+    const response = await fetch('https://quiz-two-inky.vercel.app/api/answers');
+    // const response = await fetch('http://localhost/api/answers');
     const correctAnswers = await response.json();    
     // console.dir(quizContainer.querySelectorAll('.questin-container'));
     console.dir(correctAnswers);
