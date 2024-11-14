@@ -1,6 +1,10 @@
 import express from 'express';
+import dotenv from "dotenv";
 import mongoose from 'mongoose';
 import cors from 'cors'; // Import cors
+dotenv.config();
+
+const uri = process.env.DB_URI; 
 
 const app = express();
 const PORT = 3001;
@@ -14,7 +18,7 @@ app.use(cors(
 )); // Enable CORS for all routes
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://vikas123:SpGBtqkOpLf7Sb2v@cluster0.zaohd.mongodb.net/Quiz?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
