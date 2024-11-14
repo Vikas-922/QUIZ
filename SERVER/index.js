@@ -86,16 +86,38 @@ const Quiz = mongoose.model('Quiz', quizSchema);
 //   }
 
 
-
+let correctAnswers = [];
 // Route to fetch 15 random quiz questions
 app.get('/api/questions', async (req, res) => {
     try {
-      const quizzes = await Quiz.aggregate([{ $sample: { size: 15 } }]);
-      res.status(200).json(quizzes);
+        
+        const records = await Quiz.aggregate([
+            { $sample: { size: 3 } }  
+        ]);
+        // Separate answers and questions with properly mapped options and additional fields
+        const questionsWithoutAnswers = records.map(({ _id, question, correct_answer, incorrect_answers, type, difficulty, category }) => ({
+            _id,
+            question,
+            options: [...incorrect_answers, correct_answer].sort(() => Math.random() - 0.5), // Shuffle options for randomness
+            type,
+            difficulty,
+            category
+        }));
+        // console.log(questionsWithoutAnswers);
+        
+        const correctAnswers = records.map(({ _id, correct_answer }) => ({ _id, correct_answer }));
+
+        res.status(200).json(questionsWithoutAnswers);        
+        
+        // return records;
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Error fetching random quizzes' });
-    }
+        console.error("Error fetching records:", error);
+    } 
+
+});
+
+app.get("/api/answers", (req, res) => {
+    res.status(200).json(correctAnswers);  
 });
 
 app.get('/', async (req, res) => {
