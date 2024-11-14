@@ -1,13 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import dotenv from "dotenv";
 import cors from 'cors'; // Import cors
-dotenv.config(); // Load environment variables from .env file
-const uri = process.env.DB_URI; 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
 app.use(express.json());
 app.use(cors(
   {
@@ -18,12 +14,14 @@ app.use(cors(
 )); // Enable CORS for all routes
 
 // Connect to MongoDB
-mongoose.connect(uri, {
+mongoose.connect('mongodb+srv://vikas123:SpGBtqkOpLf7Sb2v@cluster0.zaohd.mongodb.net/Quiz?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
 .then(() => {
     console.log("Database Connected");
+    // insertInitialData(); // Insert initial data on server start
+
 })
 .catch((error) => {
     console.error("Database connection error:", error);
@@ -86,7 +84,9 @@ app.get('/', async (req, res) => {
   res.send("Hello")
 });
 
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
+
