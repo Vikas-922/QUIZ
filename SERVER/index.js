@@ -98,7 +98,7 @@ app.get('/api/questions', async (req, res) => {
         const questionsWithoutAnswers = records.map(({ _id, question, correct_answer, incorrect_answers, type, difficulty, category }) => ({
             _id,
             question,
-            options: [...incorrect_answers, correct_answer].sort(() => Math.random() - 0.5), // Shuffle options for randomness
+            options: [...incorrect_answers, correct_answer], // Shuffle options for randomness
             type,
             difficulty,
             category
