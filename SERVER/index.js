@@ -95,7 +95,7 @@ app.get('/api/questions', async (req, res) => {
             category
         }));
         // console.log(questionsWithoutAnswers);        
-        const aquizAns = quizzes.map(({ _id, correct_answer }) => ({ _id, correct_answer }));
+        aquizAns = quizzes.map(({ _id, correct_answer }) => ({ _id, correct_answer }));
       // aquizAns = [{"a" : 2} , {"b" : 5}]
        res.status(200).json(questionsWithoutAnswers);
       // res.status(200).json(quizzes);
