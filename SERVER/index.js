@@ -73,23 +73,7 @@ const quizSchema = new mongoose.Schema({
 // Create the model
 const Quiz = mongoose.model('Quiz', quizSchema);
 
-// async function insertInitialData() {
-//     try {
-//       const count = await Quiz.countDocuments();
-//       if (count === 0) {
-//         await Quiz.insertMany(quizData);
-//         console.log("Initial data inserted successfully");
-//       } else {
-//         console.log("Data already exists, skipping initial insertion");
-//       }
-//     } catch (error) {
-//       console.error("Error inserting initial data:", error);
-//     }
-//   }
 
-
-// let correctAnswers = [];
-// Route to fetch 15 random quiz questions
 app.get('/api/questions', async (req, res) => {
     try {
       const quizzes = await Quiz.aggregate([{ $sample: { size: 15 } }]);
