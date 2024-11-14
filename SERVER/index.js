@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors'; // Import cors
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 app.use(express.json());
 app.use(cors(
   {
