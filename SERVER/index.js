@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from "dotenv";
 import cors from 'cors'; // Import cors
 
+dotenv.config(); // Load environment variables from .env file
 const uri = process.env.DB_URI; 
 
 const app = express();
@@ -24,8 +25,6 @@ mongoose.connect(uri, {
 })
 .then(() => {
     console.log("Database Connected");
-    // insertInitialData(); // Insert initial data on server start
-
 })
 .catch((error) => {
     console.error("Database connection error:", error);
@@ -73,7 +72,7 @@ const quizSchema = new mongoose.Schema({
 // Create the model
 const Quiz = mongoose.model('Quiz', quizSchema);
 
-
+// Route to fetch 15 random quiz questions
 app.get('/api/questions', async (req, res) => {
     try {
       const quizzes = await Quiz.aggregate([{ $sample: { size: 15 } }]);
@@ -84,14 +83,9 @@ app.get('/api/questions', async (req, res) => {
     }
 });
 
-// app.get("/api/answers", (req, res) => {
-//     res.status(200).json(correctAnswers);  
-// });
-
 app.get('/', async (req, res) => {
   res.send("Hello")
 });
-
 
 // Start the server
 app.listen(PORT, () => {
