@@ -4,7 +4,14 @@ import mongoose from 'mongoose';
 import cors from 'cors'; // Import cors
 dotenv.config();
 
-const uri = process.env.DB_URI; 
+console.log("MongoDB URI: ", process.env.DB_URI); // Log to verify URI
+
+const uri = process.env.DB_URI;
+
+if (!uri) {
+  console.error("MongoDB URI is missing in environment variables.");
+  process.exit(1);  // Exit the process if URI is not found
+}
 
 const app = express();
 const PORT = 3001;
