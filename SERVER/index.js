@@ -12,13 +12,13 @@ if (!uri) {
   console.error("MongoDB URI is missing in environment variables.");
   process.exit(1);  // Exit the process if URI is not found
 }
-
+// origin: ["https://vikas-quiz-rqt4.vercel.app"],
 const app = express();
 const PORT = 3001;
 app.use(express.json());
 app.use(cors(
   {
-    origin: ["https://vikas-quiz-rqt4.vercel.app"],
+    origin: ["https://quiz-xzrm.vercel.app", "https://quiz-xzrm-vikas-projects-76139431.vercel.app/"],
     methods: ["POST", "GET"],
     credentials: true
 }
