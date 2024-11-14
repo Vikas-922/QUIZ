@@ -109,7 +109,7 @@ app.get('/', async (req, res) => {
   res.send("Hello")
 });
 
-app.get('/letvar', async (req, res) => {
+app.get('/api/answers', async (req, res) => {
   res.status(200).json(aquizAns);
 });
 
