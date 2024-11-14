@@ -81,10 +81,12 @@ const quizSchema = new mongoose.Schema({
 // Create the model
 const Quiz = mongoose.model('Quiz', quizSchema);
 
+let aquizAns = [];
 // Route to fetch 15 random quiz questions
 app.get('/api/questions', async (req, res) => {
     try {
       const quizzes = await Quiz.aggregate([{ $sample: { size: 15 } }]);
+      aquizAns = [{"a" : 2} , {"b" : 5}]
       res.status(200).json(quizzes);
     } catch (error) {
       console.error(error);
@@ -94,6 +96,10 @@ app.get('/api/questions', async (req, res) => {
 
 app.get('/', async (req, res) => {
   res.send("Hello")
+});
+
+app.get('/letvar', async (req, res) => {
+  res.status(200).json(aquizAns);
 });
 
 
