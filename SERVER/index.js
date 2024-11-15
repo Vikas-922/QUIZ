@@ -4,10 +4,11 @@ import mongoose from 'mongoose';
 import cors from 'cors'; // Import cors
 dotenv.config();
 
-console.log("MongoDB URI: ", process.env.quizDB_URI); // Log to verify URI
+console.log("MongoDB URI: ", process.env.QuizzDB_URI); // Log to verify URI
 
 // const Quiz = process.env.Quiz_URI;
-const quizDB = process.env.quizDB_URI;
+// const quizDB = process.env.quizDB_URI;
+const quizDB = process.env.QuizzDB_URI;
 
 if (!quizDB) {
   console.error("MongoDB URI is missing in environment variables.");
@@ -80,13 +81,13 @@ const quizSchema = new mongoose.Schema({
   }
 });
 // Create the model
-const Quiz = mongoose.model('Quiz', quizSchema, 'triviaQuestionsColl');
+const Quiz = mongoose.model('Quiz', quizSchema, 'Science_Nature');
 
 let aquizAns = [];
 // Route to fetch 15 random quiz questions
 app.get('/api/questions', async (req, res) => {
     try {
-      const quizzes = await Quiz.aggregate([{ $sample: { size: 15 } }]);
+      const quizzes = await Quiz.aggregate([{ $sample: { size: 10 } }]);
       const questionsWithoutAnswers = quizzes.map(({ _id, question, correct_answer, incorrect_answers, type, difficulty, category }) => ({
             _id,
             question,
