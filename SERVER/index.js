@@ -4,11 +4,12 @@ import mongoose from 'mongoose';
 import cors from 'cors'; // Import cors
 dotenv.config();
 
-console.log("MongoDB URI: ", process.env.DB_URI); // Log to verify URI
+console.log("MongoDB URI: ", process.env.quizDB_URI); // Log to verify URI
 
-const uri = process.env.DB_URI;
+// const Quiz = process.env.Quiz_URI;
+const quizDB = process.env.quizDB_URI;
 
-if (!uri) {
+if (!quizDB) {
   console.error("MongoDB URI is missing in environment variables.");
   process.exit(1);  // Exit the process if URI is not found
 }
@@ -25,7 +26,7 @@ app.use(cors(
 )); // Enable CORS for all routes
 
 // Connect to MongoDB
-mongoose.connect(uri, {
+mongoose.connect(quizDB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -78,7 +79,7 @@ const quizSchema = new mongoose.Schema({
   }
 });
 // Create the model
-const Quiz = mongoose.model('Quiz', quizSchema);
+const Quiz = mongoose.model('Quiz', quizSchema, 'triviaQuestionsColl');
 
 let aquizAns = [];
 // Route to fetch 15 random quiz questions
