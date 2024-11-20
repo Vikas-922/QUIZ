@@ -79,6 +79,7 @@ nav ul li:nth-child(5).active-tab i { color: #9370DB; }
 .main-container{
     background-color: #4a4646;
     width: calc(100vw - 15vw); /* Adjust width to avoid merging */
+    min-height: 100vh;
     padding: 20px 20px;
     display: flex;
     align-items: center;
