@@ -24,7 +24,7 @@ app.use(cors(
     origin: ["https://quiz-xzrm.vercel.app", "https://quiz-xzrm-vikas-projects-76139431.vercel.app/"],
     methods: ["POST", "GET"],
     credentials: true
-}
+  }
 )); // Enable CORS for all routes
 
 // Connect to MongoDB
