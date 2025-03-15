@@ -81,7 +81,7 @@ const quizSchema = new mongoose.Schema({
   }
 });
 // Create the model
-const Quiz = mongoose.model('Quiz', quizSchema, 'Science_Nature');
+const Quiz = mongoose.model('Quiz', quizSchema, 'Science_Computers');
 
 let aquizAns = [];
 // Route to fetch 15 random quiz questions

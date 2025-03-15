@@ -296,6 +296,7 @@ function updateLoadingBar(progress) {
 async function fetchQuizData() {
     const loadingContainer = document.getElementById('loading-container');
     const quizContainer = document.getElementById('quiz-container');
+    document.querySelector(".row2").style.display = 'none';
 
     try {
          // Show loading bar before making the fetch request
@@ -333,6 +334,7 @@ async function fetchQuizData() {
         setTimeout(() => {
             loadingContainer.style.display = 'none';  // Hide the loading bar
             quizContainer.style.display = 'block';    // Show the quiz
+            document.querySelector(".row2").style.display = 'flex';
         }, 500);
 
     } catch (error) {
